@@ -15,5 +15,5 @@ export const useInitialState = () => {
     });
   };
 
-  return { addToCart, removeFromCart };
+  return { state, addToCart, removeFromCart };
 };

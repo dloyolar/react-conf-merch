@@ -13,7 +13,7 @@ import { useInitialState } from '../hooks/useInitialState';
 export const App = () => {
   const initialState = useInitialState();
   return (
-    <AppContext.Privider value={initialState}>
+    <AppContext.Provider value={initialState}>
       <BrowserRouter>
         <Layout>
           <Routes>
@@ -26,6 +26,6 @@ export const App = () => {
           </Routes>
         </Layout>
       </BrowserRouter>
-    </AppContext.Privider>
+    </AppContext.Provider>
   );
 };

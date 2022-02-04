@@ -1,29 +1,51 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
 
 import '../styles/components/Checkout.css';
 
 export const Checkout = () => {
+  const { state, removeFromCart } = useContext(AppContext);
+  const { cart } = state;
+
+  const handleRemove = (product) => {
+    removeFromCart(product);
+  };
+
+  const handleSumTotal = () => {
+    const reducer = (accumulator, current) => accumulator + current.price;
+    return cart.reduce(reducer, 0);
+  };
+
   return (
     <div className="Checkout">
       <div className="Checkout-content">
-        <h3>Order list:</h3>
-        <div className="Checkout-item">
-          <div className="Checkout-element">
-            <h4>Item name</h4>
-            <span>$10</span>
+        {cart.length > 0 ? (
+          <h3>Order list:</h3>
+        ) : (
+          <h3>You dont have any product yet 😔</h3>
+        )}
+        {cart.map((item, i) => (
+          <div className="Checkout-item" key={i}>
+            <div className="Checkout-element">
+              <h4>{item.title}</h4>
+              <span>${item.price}</span>
+            </div>
+            <button type="button" onClick={() => handleRemove(item)}>
+              <i className="fas fa-trash-alt" />
+            </button>
           </div>
-          <button type="button">
-            <i className="fas fa-trash-alt" />
-          </button>
+        ))}
+      </div>
+
+      {cart.length > 0 && (
+        <div className="Checkout-sidebar">
+          <h3>{`Total price:  $ ${handleSumTotal()}`}</h3>
+          <Link to={'/checkout/information'}>
+            <button type="button">Continue order</button>
+          </Link>
         </div>
-      </div>
-      <div className="Checkout-sidebar">
-        <h3>Total price: $10</h3>
-        <Link to={'/checkout/information'}>
-          <button type="button">Continue order</button>
-        </Link>
-      </div>
+      )}
     </div>
   );
 };

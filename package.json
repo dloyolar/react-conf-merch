@@ -11,6 +11,7 @@
     "lint": "eslint --fix --ext .js,.jsx ."
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.7.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",

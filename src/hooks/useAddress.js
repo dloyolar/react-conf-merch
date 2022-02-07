@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 export const useAddress = (address) => {
   const [map, setMap] = useState({});
   const { REACT_APP_MAP_REQUEST } = process.env;
-  const API = `http://open.mapquestapi.com/geocoding/v1/address?key=${REACT_APP_MAP_REQUEST}&location=${address}`;
+  const API = `https://open.mapquestapi.com/geocoding/v1/address?key=${REACT_APP_MAP_REQUEST}&location=${address}`;
 
   useEffect(() => {
     fetch(API)

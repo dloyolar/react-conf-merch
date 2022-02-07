@@ -12,7 +12,7 @@ export const Payment = () => {
   const navigate = useNavigate();
 
   const paypalOptions = {
-    clientId: process.env.PAYPAL_PAYMENT_CLIENT_ID,
+    clientId: process.env.REACT_APP_PAYPAL_PAYMENT_CLIENT_ID,
     intent: 'capture',
     currency: 'USD',
   };

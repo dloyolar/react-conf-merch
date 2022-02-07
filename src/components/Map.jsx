@@ -1,24 +1,27 @@
 import React from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+// import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
-export const Map = () => {
-  const mapStyles = {
-    height: '50vh',
-    with: '100%',
-  };
+import '../styles/components/Maps.css';
 
+export const Map = ({ data }) => {
   const defaultCenter = {
-    lat: 19.4267261,
-    lng: -99.1718796,
+    lat: data.lat,
+    lng: data.lng,
   };
-
-  const googleMapsClientID = process.env.GOOGLE_MAPS_CLIENT_ID;
-
   return (
-    <LoadScript googleMapsApiKey={googleMapsClientID}>
-      <GoogleMap mapContainerStyle={mapStyles} zoom={9} center={defaultCenter}>
-        <Marker position={defaultCenter} />
-      </GoogleMap>
-    </LoadScript>
+    <MapContainer
+      center={defaultCenter}
+      zoom={10}
+      className="Leaflet-container"
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Marker position={defaultCenter}>
+        <Popup>Your address</Popup>
+      </Marker>
+    </MapContainer>
   );
 };
